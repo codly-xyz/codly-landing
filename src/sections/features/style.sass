@@ -1,0 +1,63 @@
+@import 'src/styles/colors'
+@import 'src/styles/mixins/container'
+
+
+section#features
+  background: $dark-5
+  padding: 50px 0
+  overflow: hidden
+
+  .container
+    @include container
+    position: relative
+    padding-bottom: 50px
+
+  h2
+    font-size: 50px
+    line-height: 60px
+    width: 400px
+    height: 120px
+
+  .feat-slider
+    position: relative
+    z-index: 5
+    margin-top: 35px
+    width: 325px
+
+
+
+  .illustrations
+    position: absolute
+    overflow: hidden
+
+    z-index: 4
+    right: 0
+    top: 50%
+    transform: translateY(-50%)
+
+    // perspective: 3500px
+    perspective-origin: center -25vh
+
+    $size: calc(65% - 120px)
+    padding-right: $size
+    padding-bottom: $size
+
+    border-radius: 50%
+    overflow: hidden
+
+    @media (max-width: 800px)
+      display: none
+
+
+    & ::v-deep .laptop3d,
+    & ::v-deep .server
+      position: absolute
+      top: 50%
+      left: 50%
+
+    .background
+      position: absolute
+      border-radius: 50%
+      width: 100%
+      height: 100%
+      background: transparentize($white, .965)

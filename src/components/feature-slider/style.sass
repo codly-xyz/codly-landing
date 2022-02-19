@@ -1,0 +1,52 @@
+@import 'src/styles/variables'
+
+.feat-slider
+  position: relative
+  display: flex
+
+  .slider
+    position: relative
+    margin-right: 20px
+
+    .track
+      height: 100%
+      width: 1px
+      background-color: #4f4f52
+
+    .thumb
+      position: absolute
+      left: -1px
+      width: 3px
+      background: $white
+
+      // These will be manipulated in JS by transforms
+      top: 0
+      height: 10px
+
+      transform-origin: top center
+      transition: transform .25s
+
+  .list
+    padding: 3px 0
+
+    .item
+      font-family: $font-nunito
+      font-size: 16px
+      transition: opacity .25s
+      cursor: pointer
+
+      &:not(:last-child)
+        margin-bottom: 18px
+
+      &:not(.selected)
+        opacity: .4
+
+      h4
+        color: $light-text-primary
+        font-weight: 700
+        margin: 0 0 4px
+
+      p
+        color: transparentize($white, .3)
+        font-weight: 400
+        margin: 0

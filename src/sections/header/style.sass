@@ -1,0 +1,122 @@
+@import 'src/styles/variables'
+@import 'src/styles/mixins/container'
+
+
+header
+  position: relative
+  min-height: 90vh
+  background: $dark-2
+  align-items: center
+  padding: 110px 0 50px
+
+  .container
+    @include container
+    display: inline-flex
+
+    font-size: 24px
+
+    @media (min-width: 800px) and (max-width: 1000px)
+      font-size: calc(24px + (100vw - 1000px) / 40)
+
+    @media (max-width: 545px)
+      font-size: calc(24px + (100vw - 545px) / 20.15) // 20.15 is very much a Magic Number to make the header fit but yolo
+
+    // Vertical mobile layout
+    @media (max-width: 799px)
+      width: auto
+      flex-direction: column
+      align-items: center
+      padding: 30px
+
+      div.right
+        display: none
+
+
+    .left
+      flex-basis: 0 // sass-lint:disable-line empty-line-between-blocks
+      flex-grow: 0
+      flex-shrink: 0
+
+      display: inline-block
+
+      h1
+        display: inline-block
+        white-space: nowrap
+
+        font-size: 3.75em
+        line-height: 1em
+
+        & > span
+          line-height: 1.1em
+
+        span.green
+          background: $green-gradient
+          -webkit-text-fill-color: transparent
+          -webkit-background-clip: text
+
+      p
+        display: flex
+        margin: 5px 0 0
+        font-family: $font-nunito
+        font-weight: 400
+        font-size: 1em
+        color: $light-text-hint
+
+        .contents
+          display: block
+          flex-grow: 1
+          width: 0
+
+
+    .right
+      flex-basis: 0
+      flex-grow: 1
+      flex-shrink: 0
+      position: relative
+      margin-left: 40px
+
+      .forms-container
+        position: relative
+        width: 100%
+        max-width: 460px
+        min-height: 100%
+        position: absolute
+        right: 0
+
+        &.anim
+          animation: pop .55s cubic-bezier(.69, 0, .55, 1.06)
+
+      form,
+      .unsupported-browser-message
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        width: 100%
+        min-height: 100%
+
+      form
+        font-size: 1.45em
+
+
+
+@keyframes pop
+  from
+    transform: scale(1)
+
+  60%
+    transform: scale(1.07)
+
+  80%
+    transform: scale(.97)
+
+  to
+    transform: scale(1)
+
+
+.form-fade-enter-active,
+.form-fade-leave-active
+  transition: opacity .01s .398s
+
+.form-fade-enter,
+.form-fade-leave-to
+  opacity: 0

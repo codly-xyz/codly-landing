@@ -1,0 +1,138 @@
+@import 'src/styles/variables'
+
+$length: 300px
+$width: $length * (5 / 7)
+$height: 35px
+
+$base-color: #292a33
+
+$silver-1: lighten($base-color, 4%)
+$silver-2: lighten($base-color, 2%)
+$silver-3: $base-color
+$silver-4: darken($base-color, 2%)
+$silver-5: darken($base-color, 4%)
+
+.server
+  .server3d
+    position: absolute
+    transform-origin: center center 0
+    transform: translateX(-40%) translateY(-15%) rotateX(60deg) rotateY(0deg) rotateZ(-45deg)
+    transform-style: preserve-3d
+
+    .wrapper
+      transform-origin: 50% 50% 0
+      transform-style: preserve-3d
+
+      transition: transform .25s
+      will-change: transform
+
+    .box
+      position: relative
+      width: $length
+      height: $width
+      background: linear-gradient(to bottom right, $silver-1, $silver-5)
+      background-repeat: no-repeat
+      transform-style: preserve-3d
+
+      $slit-height: 9px
+
+      $dots-height: 12px
+      $dots-width: $dots-height * 3.5
+
+      .left,
+      .right
+        display: flex
+        align-items: center
+        left: 0
+        top: 0
+        height: $height
+        clip-path: inset(0 0 -50px 0)
+        padding: 0 6px
+
+        .label
+          order: 1
+          font-size: 12px
+          font-family: $font-lato
+          font-weight: 900
+          color: transparentize($white, .9)
+          text-transform: uppercase
+          margin: 0 3px
+
+          &::before
+            content: ''
+            display: inline-block
+            width: 20px
+            height: $slit-height
+            margin-right: 6px
+            border-radius: 1.5px
+            background: transparentize($black, .8)
+
+        // Slit
+        &::before
+          content: ''
+          order: 2
+          flex-grow: 1
+          height: $slit-height
+          margin: 0 3px
+          border-radius: 1.5px
+          background: transparentize($black, .8)
+
+        // Dots
+        &::after
+          content: ''
+          order: 3
+          flex-grow: 0
+          width: $dots-width
+          height: $dots-height
+          margin: 0 2px
+          background-image: radial-gradient($green-solid 35%, transparent 35%)
+          background-size: $dots-height / 2 $dots-height / 2
+
+          animation: dots-glow 3s infinite
+
+      .left
+        position: absolute
+        flex-direction: row-reverse
+        background: linear-gradient(to left, $silver-2, $silver-4)
+        width: $width
+        transform-origin: top left
+        transform: rotateZ(90deg) rotateX(-90deg) rotateY(0)
+
+        animation: left-box-shadow 3s infinite
+
+
+      .right
+        flex-direction: row
+        background: linear-gradient(to bottom right, $silver-3, $silver-5)
+        width: $length
+        transform-origin: top
+        transform: translateY($width) rotateX(-90deg)
+
+        animation: right-box-shadow 3s infinite
+
+
+@keyframes dots-glow
+  from,
+  to
+    opacity: .45
+
+  50%
+    opacity: 1
+
+
+@keyframes left-box-shadow
+  from,
+  to
+    box-shadow: 10px 4px 10px -1.25px transparentize($green-solid, .65)
+
+  50%
+    box-shadow: 10px 6px 16px -2.5px transparentize($green-solid, .45)
+
+
+@keyframes right-box-shadow
+  from,
+  to
+    box-shadow: -10px 4px 10px -1.25px transparentize($green-solid, .65)
+
+  50%
+    box-shadow: -10px 6px 16px -2.5px transparentize($green-solid, .45)
